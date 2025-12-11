@@ -1,115 +1,115 @@
-import { Zap } from "lucide-react";
+import { Download, FileText, Wand2, Zap } from "lucide-react";
+import Title from "./Title";
+import { motion } from "framer-motion";
 
 const Feature = () => {
   return (
     <div id="feature" className="flex flex-col items-center mt-20">
-      <div className="flex items-center gap-2 text-sm text-blue-800 bg-blue-400/10 border border-indigo-200 rounded-full px-4 py-1">
+      {/* Badge */}
+      <motion.div
+        initial={{ opacity: 1, y: -10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 2,
+          ease: "easeInOut",
+        }}
+        className="flex items-center gap-2 text-sm text-blue-500 bg-blue-400/10 border border-indigo-200 rounded-full px-4 py-1"
+      >
         <Zap size={14} />
         <span>Easy process</span>
-      </div>
-      <div className="flex flex-col md:flex-row">
-        <img
-          className="max-w-2xl w-full"
-          src="https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/features/card-image-1.png"
-          alt=""
+      </motion.div>
+
+      {/* Title */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <Title
+          title="Craft Your Resume"
+          description="Effortlessly generate a standout resume in just minutes using our streamlined AI‑powered process."
         />
+      </motion.div>
+
+      <div className="flex flex-col md:flex-row items-center gap-10">
+        {/* Animated Image */}
+        <motion.img
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="max-w-50 md:max-w-xs rounded-3xl m-15"
+          style={{
+            boxShadow:
+              "10px 10px 45px rgba(0,0,0,0.25), 10px 10px 40px rgba(0,0,0,0.25)",
+          }}
+          src="https://images.pexels.com/photos/5989925/pexels-photo-5989925.jpeg"
+          alt="Resume illustration"
+        />
+
+        {/* Feature Cards */}
         <div className="space-y-10 px-4 md:px-0">
-          <div className="flex items-center justify-center gap-6 max-w-md">
+          {/* Feature 1 */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex items-center gap-6 max-w-md"
+          >
             <div className="p-6 aspect-square bg-violet-100 rounded-full">
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 28 28"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M14 18.667V24.5m4.668-8.167V24.5m4.664-12.833V24.5m2.333-21L15.578 13.587a.584.584 0 0 1-.826 0l-3.84-3.84a.583.583 0 0 0-.825 0L2.332 17.5M4.668 21v3.5m4.664-8.167V24.5"
-                  stroke="#7F22FE"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <FileText className="w-7 h-7 text-violet-600" />
             </div>
             <div className="space-y-2">
               <h3 className="text-base font-semibold text-slate-700">
-                Real-Time Analytics
+                Smart Resume Templates
               </h3>
               <p className="text-sm text-slate-600">
-                Get instant insights into your finances with live dashboards.
+                Choose from modern, recruiter‑friendly designs tailored to your
+                career goals.
               </p>
             </div>
-          </div>
-          <div className="flex items-center justify-center gap-6 max-w-md">
+          </motion.div>
+
+          {/* Feature 2 */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex items-center gap-6 max-w-md"
+          >
             <div className="p-6 aspect-square bg-green-100 rounded-full">
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 28 28"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M14 11.667A2.333 2.333 0 0 0 11.667 14c0 1.19-.117 2.929-.304 4.667m4.972-3.36c0 2.776 0 7.443-1.167 10.36m5.004-1.144c.14-.7.502-2.683.583-3.523M2.332 14a11.667 11.667 0 0 1 21-7m-21 11.667h.01m23.092 0c.233-2.333.152-6.246 0-7"
-                  stroke="#00A63E"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M5.832 22.75C6.415 21 6.999 17.5 6.999 14a7 7 0 0 1 .396-2.333m2.695 13.999c.245-.77.525-1.54.665-2.333m-.255-15.4A7 7 0 0 1 21 14v2.333"
-                  stroke="#00A63E"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <Wand2 className="w-7 h-7 text-green-600" />
             </div>
             <div className="space-y-2">
               <h3 className="text-base font-semibold text-slate-700">
-                Bank-Grade Security
+                AI‑Powered Suggestions
               </h3>
               <p className="text-sm text-slate-600">
-                End-to-end encryption, 2FA, compliance with GDPR standards.
+                Get instant guidance on phrasing, formatting, and keywords to
+                stand out.
               </p>
             </div>
-          </div>
-          <div className="flex items-center justify-center gap-6 max-w-md">
+          </motion.div>
+
+          {/* Feature 3 */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex items-center gap-6 max-w-md"
+          >
             <div className="p-6 aspect-square bg-orange-100 rounded-full">
-              <svg
-                width="28"
-                height="28"
-                viewBox="0 0 28 28"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M4.668 25.666h16.333a2.333 2.333 0 0 0 2.334-2.333V8.166L17.5 2.333H7a2.333 2.333 0 0 0-2.333 2.333v4.667"
-                  stroke="#F54900"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M16.332 2.333V7a2.334 2.334 0 0 0 2.333 2.333h4.667m-21 8.167h11.667M10.5 21l3.5-3.5-3.5-3.5"
-                  stroke="#F54900"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <Download className="w-7 h-7 text-orange-600" />
             </div>
             <div className="space-y-2">
               <h3 className="text-base font-semibold text-slate-700">
-                Customizable Reports
+                Easy Export & Sharing
               </h3>
               <p className="text-sm text-slate-600">
-                Export professional, audit-ready financial reports for tax or
-                internal review.
+                Download your resume as PDF or share it instantly with
+                recruiters.
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

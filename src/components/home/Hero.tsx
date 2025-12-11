@@ -11,7 +11,7 @@ const Hero = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <main className="isolate flex items-center flex-col justify-between bg-[url('https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/hero/bg-gradient.png')] bg-cover text-sm text-gray-800 max-md:px-4 text-center min-h-screen relative">
+    <main className="isolate flex items-center flex-col justify-start bg-[url('https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/hero/bg-gradient.png')] bg-cover text-sm text-gray-800 max-md:px-4 text-center min-h-screen relative">
       <nav className="flex items-center justify-between w-full md:px-16 lg:px-20 relative z-10">
         {/* Logo */}
         <a href="#" aria-label="Ai-builder Logo">
@@ -104,7 +104,7 @@ const Hero = () => {
       </nav>
 
       {/* HERO CONTENT */}
-      <div className="flex flex-col items-center justify-center w-full relative z-0 -top-25">
+      <div className="flex flex-col items-center justify-center w-full relative z-0 mt-15">
         <motion.h1
           initial={{ opacity: 0, y: -30 }}
           animate={{ opacity: 1, y: 0 }}
