@@ -12,7 +12,7 @@ const Footer = () => {
       viewport={{ once: true }}
       className="w-full bg-linear-to-b from-[#f6f1ff] via-[#F1EAFF] to-[#FFFFFF] text-gray-800"
     >
-      <div className="max-w-7xl mx-auto px-6 py-10 flex flex-row items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 py-10 flex flex-col md:flex-row items-center justify-center md:justify-between">
         {/* Footer Links */}
         {footerSections.map((section, idx) => (
           <motion.div
@@ -28,7 +28,7 @@ const Footer = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="hover:text-cyan-600 transition"
+                    className="hover:text-cyan-600 hover:underline transition"
                   >
                     {link.label}
                     {link.badge && (
@@ -52,7 +52,7 @@ const Footer = () => {
             viewport={{ once: true }}
             className="flex items-center space-x-3 mb-6"
           >
-            <img alt="logo" className="h-20 md:h-30" src={logo} />
+            <img alt="logo" className="w-30 md:w-40" src={logo} />
           </motion.div>
 
           <motion.p

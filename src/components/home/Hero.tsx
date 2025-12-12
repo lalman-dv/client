@@ -18,7 +18,7 @@ const Hero = () => {
           <img
             src={logo}
             alt="Ai-builder Logo"
-            className="w-20 md:w-32 h-auto"
+            className="w-30 md:w-40 h-auto"
           />
         </a>
 
