@@ -68,14 +68,14 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[url('https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/hero/bg-gradient.png')] bg-cover">
+    <main className="min-h-screen bg-[url('https://raw.githubusercontent.com/prebuiltui/prebuiltui/main/assets/hero/bg-gradient.png')] bg-cover">
       <div className="max-w-7xl mx-auto px-4 py-8">
         <p className="text-2xl font-medium mb-6 bg-linear-to-r from-slate-600 to-slate-700 bg-clip-text text-transparent sm:hidden">
           Hello, Alex{" "}
         </p>
 
         {/* Create + Upload buttons */}
-        <div className="flex gap-4">
+        <section className="flex gap-4">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -105,13 +105,13 @@ const Dashboard = () => {
               Upload Resume
             </p>
           </motion.button>
-        </div>
+        </section>
 
         <hr className="border-slate-300 my-6 sm:w-76" />
 
         {/* Resume List */}
         {allResumes.length === 0 ? (
-          <p className="text-slate-500 text-sm">
+          <p aria-live="polite" className="text-slate-500 text-sm">
             No resumes yet. Create or upload one to get started.
           </p>
         ) : (
@@ -214,7 +214,7 @@ const Dashboard = () => {
           }}
         />
       </div>
-    </div>
+    </main>
   );
 };
 
