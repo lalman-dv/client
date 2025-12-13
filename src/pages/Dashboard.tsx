@@ -7,12 +7,12 @@ import {
   XIcon,
 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { dummyResumeData } from "../assets/assets";
 import type { Resume } from "../assets/types";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-  // ✅ Explicitly typed states
   const [allResuemes, setAllResumes] = useState<Resume[]>([]);
   const [showCreateResume, setShowCreateResume] = useState<boolean>(false);
   const [showUploadResume, setShowUploadResume] = useState<boolean>(false);
@@ -45,7 +45,17 @@ const Dashboard = () => {
     setShowUploadResume(false);
     navigate(`/app/builder/resume123`);
   };
-
+  const editTitle = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault;
+  };
+  const deleteResume = async (resumeId: string) => {
+    const confirm = window.confirm(
+      "Are you sure you want to delete this resume?"
+    );
+    if (confirm) {
+      setAllResumes((prev) => prev.filter((resume) => resume._id !== resumeId));
+    }
+  };
   useEffect(() => {
     loadAllResumes();
   }, []);
@@ -59,7 +69,9 @@ const Dashboard = () => {
 
         {/* Create + Upload buttons */}
         <div className="flex gap-4">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setShowCreateResume(true)}
             className="w-full bg-white sm:max-w-36 h-48 flex flex-col items-center justify-center rounded-lg gap-2 text-slate-600 border border-dashed border-purple-200 group hover:border-purple-500 hover:shadow-lg transition-all duration-300 cursor-pointer"
           >
@@ -67,9 +79,11 @@ const Dashboard = () => {
             <p className="text-sm group-hover:text-purple-600 transition-all">
               Create New Resume
             </p>
-          </button>
+          </motion.button>
 
-          <button
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setShowUploadResume(true)}
             className="w-full bg-white sm:max-w-36 h-48 flex flex-col items-center justify-center rounded-lg gap-2 text-slate-600 border border-dashed border-indigo-300 group hover:border-indigo-500 hover:shadow-lg transition-all duration-300 cursor-pointer"
           >
@@ -77,7 +91,7 @@ const Dashboard = () => {
             <p className="text-sm group-hover:text-indigo-600 transition-all">
               Upload Resume
             </p>
-          </button>
+          </motion.button>
         </div>
 
         <hr className="border-slate-300 my-6 sm:w-76" />
@@ -87,9 +101,12 @@ const Dashboard = () => {
           {allResuemes.map((resume, index) => {
             const baseColor = colors[index % colors.length];
             return (
-              <button
+              <motion.button
                 onClick={() => navigate(`/app/builder/${resume._id}`)}
-                key={index}
+                key={resume._id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="relative w-full sm:max-w-36 h-48 flex flex-col items-center justify-center rounded-lg gap-2 border group hover:shadow-lg transition-all duration-300 cursor-pointer"
                 style={{
                   background: `linear-gradient(135deg, ${baseColor}10, ${baseColor}40)`,
@@ -100,37 +117,59 @@ const Dashboard = () => {
                   className="size-7 group-hover:scale-105 transition-all"
                   style={{ color: baseColor }}
                 />
-                <p
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.15 }}
                   className="text-sm group-hover:scale-105 transition-all px-2 text-center"
                   style={{ color: baseColor }}
                 >
                   {resume.title}
-                </p>
+                </motion.p>
                 <p
                   className="absolute bottom-1 text-[11px] text-slate-400 group-hover:text-slate-500 transition-all duration-300 px-2 text-center"
                   style={{ color: baseColor + "90" }}
                 >
-                  updated on{" "}
-                  {new Date(resume.updatedAt).toLocaleDateString()}
+                  updated on {new Date(resume.updatedAt).toLocaleDateString()}
                 </p>
-                <div className="absolute top-1 right-1 group-hover:flex items-center hidden">
-                  <TrashIcon className="size-7 p-1.5 hover:bg-white/50 rounded text-slate-700 transition-colors" />
-                  <PencilIcon className="size-7 p-1.5 hover:bg-white/50 rounded text-slate-700 transition-colors" />
-                </div>
-              </button>
+                <motion.div
+                  onClick={(e) => e.stopPropagation()}
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  className="absolute top-1 right-1 group-hover:flex items-center hidden"
+                >
+                  <TrashIcon
+                    onClick={() => deleteResume(resume._id)}
+                    className="size-7 p-1.5 hover:bg-white/50 rounded text-slate-700 transition-colors"
+                  />
+                  <PencilIcon
+                    onClick={() => {
+                      setEditResumeId(resume._id);
+                      setTitle(resume.title);
+                    }}
+                    className="size-7 p-1.5 hover:bg-white/50 rounded text-slate-700 transition-colors"
+                  />
+                </motion.div>
+              </motion.button>
             );
           })}
         </div>
 
         {/* Create Resume Modal */}
         {showCreateResume && (
-          <form
-            onSubmit={createResume}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             onClick={() => setShowCreateResume(false)}
             className="fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center"
           >
-            <div
+            <motion.form
+              onSubmit={createResume}
               onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.4 }}
               className="relative bg-slate-50 border shadow-md rounded-lg w-full max-w-sm p-6"
             >
               <h2 className="text-xl font-bold mb-4">Create a New Resume</h2>
@@ -142,9 +181,13 @@ const Dashboard = () => {
                 className="w-full px-4 py-2 mb-4 focus:border-purple-600 ring-purple-600"
                 required
               />
-              <button className="w-full py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition-colors">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition-colors"
+              >
                 Create Resume
-              </button>
+              </motion.button>
               <XIcon
                 onClick={() => {
                   setShowCreateResume(false);
@@ -152,19 +195,25 @@ const Dashboard = () => {
                 }}
                 className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition-colors"
               />
-            </div>
-          </form>
+            </motion.form>
+          </motion.div>
         )}
 
         {/* Upload Resume Modal */}
         {showUploadResume && (
-          <form
-            onSubmit={uploadResume}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             onClick={() => setShowUploadResume(false)}
             className="fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center"
           >
-            <div
+            <motion.form
+              onSubmit={uploadResume}
               onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.4 }}
               className="relative bg-slate-50 border shadow-md rounded-lg w-full max-w-sm p-6"
             >
               <h2 className="text-xl font-bold mb-4">
@@ -196,9 +245,13 @@ const Dashboard = () => {
                   onChange={(e) => setResume(e.target.files?.[0] ?? null)}
                 />
               </div>
-              <button className="w-full py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition-colors">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition-colors"
+              >
                 Upload Resume
-              </button>
+              </motion.button>
               <XIcon
                 onClick={() => {
                   setShowUploadResume(false);
@@ -206,8 +259,160 @@ const Dashboard = () => {
                 }}
                 className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition-colors"
               />
-            </div>
-          </form>
+            </motion.form>
+          </motion.div>
+        )}
+
+        {/* Create Resume Modal */}
+        {showCreateResume && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowCreateResume(false)}
+            className="fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center"
+          >
+            <motion.form
+              onSubmit={createResume}
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="relative bg-slate-50 border shadow-md rounded-lg w-full max-w-sm p-6"
+            >
+              <h2 className="text-xl font-bold mb-4">Create a New Resume</h2>
+              <input
+                onChange={(e) => setTitle(e.target.value)}
+                value={title}
+                type="text"
+                placeholder="Enter resume title"
+                className="w-full px-4 py-2 mb-4 focus:border-purple-600 ring-purple-600"
+                required
+              />
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition-colors"
+              >
+                Create Resume
+              </motion.button>
+              <XIcon
+                onClick={() => {
+                  setShowCreateResume(false);
+                  setTitle("");
+                }}
+                className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition-colors"
+              />
+            </motion.form>
+          </motion.div>
+        )}
+
+        {/* Upload Resume Modal */}
+        {showUploadResume && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowUploadResume(false)}
+            className="fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center"
+          >
+            <motion.form
+              onSubmit={uploadResume}
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.3 }}
+              className="relative bg-slate-50 border shadow-md rounded-lg w-full max-w-sm p-6"
+            >
+              <h2 className="text-xl font-bold mb-4">
+                Upload an existing Resume
+              </h2>
+              <input
+                onChange={(e) => setTitle(e.target.value)}
+                value={title}
+                type="text"
+                placeholder="Enter resume title"
+                className="w-full px-4 py-2 mb-4 focus:border-purple-600 ring-purple-600"
+                required
+              />
+              <div>
+                <label
+                  htmlFor="resume-input"
+                  className="block text-sm text-slate-700"
+                >
+                  Select Resume File
+                  <div className="flex flex-col items-center justify-center gap-2 border group text-slate-400 border-slate-400 border-dashed rounded-md p-4 py-10 my-4 hover:border-indigo-500 hover:text-indigo-600 cursor-pointer transition-colors">
+                    {resume ? <p>{resume.name}</p> : <UploadCloudIcon />}
+                  </div>
+                </label>
+                <input
+                  type="file"
+                  id="resume-input"
+                  accept=".pdf"
+                  hidden
+                  onChange={(e) => setResume(e.target.files?.[0] ?? null)}
+                />
+              </div>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition-colors"
+              >
+                Upload Resume
+              </motion.button>
+              <XIcon
+                onClick={() => {
+                  setShowUploadResume(false);
+                  setTitle("");
+                }}
+                className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition-colors"
+              />
+            </motion.form>
+          </motion.div>
+        )}
+
+        {/* Edit Resume Modal */}
+        {editResumeId && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setEditResumeId("")}
+            className="fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center"
+          >
+            <motion.form
+              onSubmit={editTitle}
+              onClick={(e) => e.stopPropagation()}
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.4 }}
+              className="relative bg-slate-50 border shadow-md rounded-lg w-full max-w-sm p-6"
+            >
+              <h2 className="text-xl font-bold mb-4">Edit Resume Title</h2>
+              <input
+                onChange={(e) => setTitle(e.target.value)}
+                value={title}
+                type="text"
+                placeholder="Enter resume title"
+                className="w-full px-4 py-2 mb-4 focus:border-purple-600 ring-purple-600"
+                required
+              />
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition-colors"
+              >
+                Update
+              </motion.button>
+              <XIcon
+                onClick={() => {
+                  setEditResumeId("");
+                  setTitle("");
+                }}
+                className="absolute top-4 right-4 text-slate-400 hover:text-slate-600 cursor-pointer transition-colors"
+              />
+            </motion.form>
+          </motion.div>
         )}
       </div>
     </div>
