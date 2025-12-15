@@ -196,8 +196,11 @@ const ResumeBuilder: React.FC = () => {
           </section>
 
           {/* Preview - right side panel */}
-          <aside className="lg:col-span-7" aria-label="Resume preview">
-            {/* TODO: Add preview content */}
+          <aside className="lg:col-span-7 max-lg:mt-6" aria-label="Resume preview">
+            <div>
+              {/* buttons */}
+            </div>
+            {/* Resume Preview */}
           </aside>
         </div>
       </div>

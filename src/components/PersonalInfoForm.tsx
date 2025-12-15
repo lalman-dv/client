@@ -13,6 +13,13 @@ import { motion } from "framer-motion";
 
 interface PersonalInfoData {
   image?: string | File;
+  full_name?: string;
+  email?: string;
+  phone?: string;
+  location?: string;
+  profession?: string;
+  linkedin?: string;
+  website?: string;
 }
 
 interface PersonalInfoFormProps {
@@ -21,8 +28,12 @@ interface PersonalInfoFormProps {
   removeBackground: boolean;
   setRemoveBackGround: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+// Exclude "image" from text fields
+type PersonalTextFieldKey = keyof Omit<PersonalInfoData, "image">;
+
 interface FormField {
-  key: string;
+  key: PersonalTextFieldKey;
   label: string;
   icon: LucideIcon;
   type: "text" | "email" | "tel" | "url";
@@ -35,12 +46,14 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
   removeBackground,
   setRemoveBackGround,
 }) => {
-  const handleChange = (
-    field: keyof PersonalInfoData,
-    value: string | File
-  ) => {
+  const handleTextChange = (field: PersonalTextFieldKey, value: string) => {
     onChange({ ...data, [field]: value });
   };
+
+  const handleImageChange = (file: File) => {
+    onChange({ ...data, image: file });
+  };
+
   const fields: FormField[] = [
     {
       key: "full_name",
@@ -95,6 +108,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
         Get started with your personal information
       </motion.p>
 
+      {/* Image upload + toggle */}
       <motion.div
         className="flex items-center gap-4"
         initial={{ opacity: 0 }}
@@ -135,7 +149,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
             className="hidden"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               if (e.target.files && e.target.files[0]) {
-                handleChange("image", e.target.files[0]);
+                handleImageChange(e.target.files[0]);
               }
             }}
           />
@@ -158,12 +172,13 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
                 aria-label="Toggle background removal"
               />
               <motion.div
-                className="w-9 h-5 bg-slate-300 rounded-full peer peer-checked:bg-purple-500 transition-colors duration-200"
-                layout
+                className="w-9 h-5 bg-slate-300 rounded-full transition-colors duration-200"
+                animate={{
+                  backgroundColor: removeBackground ? "#9333ea" : "#cbd5e1",
+                }}
               />
               <motion.span
                 className="absolute left-1 top-1 w-3 h-3 bg-white rounded-full"
-                layout
                 animate={{ x: removeBackground ? 16 : 0 }}
                 transition={{ type: "spring", stiffness: 200, damping: 10 }}
               />
@@ -171,17 +186,35 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
           </motion.div>
         )}
       </motion.div>
-      {fields.map((field)=>{
-        const Icon=field.icon;
-        return(
-          <div key={field.key}
-          className="space-y-1 mt-5">
+
+      {/* Animated fields */}
+      {fields.map((field, index) => {
+        const Icon = field.icon;
+        const value = data[field.key] ?? "";
+
+        return (
+          <motion.div
+            key={field.key}
+            className="space-y-1 mt-5"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3, delay: 0.3 + index * 0.1 }}
+          >
             <label className="flex items-center gap-2 text-sm font-medium text-gray-600">
               <Icon className="size-4" />
+              {field.label}
+              {field.required && <span className="text-red-500">*</span>}
             </label>
-
-          </div>
-        )
+            <input
+              type={field.type}
+              value={value}
+              onChange={(e) => handleTextChange(field.key, e.target.value)}
+              className="mt-1 w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring focus:ring-purple-500 focus:border-purple-500 outline-none transition-colors text-sm"
+              placeholder={`Enter your ${field.label.toLowerCase()}`}
+              required={field.required}
+            />
+          </motion.div>
+        );
       })}
     </motion.section>
   );
