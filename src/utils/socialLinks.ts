@@ -16,7 +16,7 @@ export const socialLinks = [
   },
   {
     id: "linkedin",
-    href: "https://https://www.linkedin.com/in/lalman-lalman-34490a163/",
+    href: "https://www.linkedin.com/in/lalman-lalman-34490a163/",
     icon: Linkedin,
     label: "LinkedIn",
   },

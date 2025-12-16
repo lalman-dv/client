@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import PersonalInfoForm from "../components/PersonalInfoForm";
+import ResumePreview from "../components/ResumePreview";
 
 interface ResumeData {
   _id: string;
@@ -24,7 +25,7 @@ interface ResumeData {
   education: any[];
   project: any[];
   skills: string[];
-  template: string;
+  template: "classic" | "modern" | "minimal" | "minimal-image";
   accent_color: string;
   public: boolean;
 }
@@ -196,11 +197,17 @@ const ResumeBuilder: React.FC = () => {
           </section>
 
           {/* Preview - right side panel */}
-          <aside className="lg:col-span-7 max-lg:mt-6" aria-label="Resume preview">
-            <div>
-              {/* buttons */}
-            </div>
+          <aside
+            className="lg:col-span-7 max-lg:mt-6"
+            aria-label="Resume preview"
+          >
+            <div>{/* buttons */}</div>
             {/* Resume Preview */}
+            <ResumePreview
+              data={resumeData}
+              template={resumeData.template}
+              accentColor={resumeData.accent_color}
+            />
           </aside>
         </div>
       </div>
