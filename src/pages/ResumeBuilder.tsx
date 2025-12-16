@@ -16,6 +16,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import PersonalInfoForm from "../components/PersonalInfoForm";
 import ResumePreview from "../components/ResumePreview";
 import TemplateSelector from "../components/templates/TemplateSelector";
+import ColorPicker from "../components/templates/ColorPicker";
 
 interface ResumeData {
   _id: string;
@@ -125,14 +126,23 @@ const ResumeBuilder: React.FC = () => {
               {/* Section Navigation */}
               <nav
                 aria-label="Section navigation"
-                className="flex items-center gap-2"
+                className="flex justify-between items-center mb-6 border-b border-gray-300 py-1"
               >
-                {/* template selector */}
-                <div className="flex jestify-center items-center mb-6 border-b border-gray-300 py-1">
+                {/* template selector & Color Picker */}
+                <div className="flex items-center gap-2">
                   <TemplateSelector
                     selectedTemplate={resumeData.template}
                     onChange={(template) =>
                       setResumeData((prev) => ({ ...prev, template }))
+                    }
+                  />
+                  <ColorPicker
+                    selectedColor={resumeData.accent_color}
+                    onChange={(color) =>
+                      setResumeData((prev) => ({
+                        ...prev,
+                        accent_color: color,
+                      }))
                     }
                   />
                 </div>
