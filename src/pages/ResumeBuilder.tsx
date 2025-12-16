@@ -15,6 +15,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import PersonalInfoForm from "../components/PersonalInfoForm";
 import ResumePreview from "../components/ResumePreview";
+import TemplateSelector from "../components/templates/TemplateSelector";
 
 interface ResumeData {
   _id: string;
@@ -124,9 +125,17 @@ const ResumeBuilder: React.FC = () => {
               {/* Section Navigation */}
               <nav
                 aria-label="Section navigation"
-                className="flex justify-between items-center mb-6 border-b border-gray-300 py-1"
+                className="flex items-center gap-2"
               >
-                <div></div>
+                {/* template selector */}
+                <div className="flex jestify-center items-center mb-6 border-b border-gray-300 py-1">
+                  <TemplateSelector
+                    selectedTemplate={resumeData.template}
+                    onChange={(template) =>
+                      setResumeData((prev) => ({ ...prev, template }))
+                    }
+                  />
+                </div>
                 <div className="flex items-center">
                   {activeSectionIndex !== 0 && (
                     <motion.button
