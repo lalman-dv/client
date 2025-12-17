@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
-import PersonalInfoForm from "../../components/PersonalInfoForm";
-import SummaryForm from "../../components/SummaryForm";
-import ExperienceForm from "../../components/ExperienceForm";
+import PersonalInfoForm from "../Personal&ProfessionalInfo/PersonalInfoForm";
+import SummaryForm from "../Personal&ProfessionalInfo/SummaryForm";
+import ExperienceForm from "../Personal&ProfessionalInfo/ExperienceForm";
 import type { ResumeData } from "../../utils/types";
 
 interface Props {
