@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeftIcon } from "lucide-react";
 import { dummyResumeData } from "../../assets/assets";
-import type { ResumeData } from "../../assets/types";
+import type { ResumeData } from "../../utils/types";
 import ProgressBar from "./ProgressBar";
 import SectionNavigation from "./SectionNavigation";
 import SectionContent from "./SectionContent";

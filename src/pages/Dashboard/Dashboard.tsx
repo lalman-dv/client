@@ -8,7 +8,7 @@ import {
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { dummyResumeData } from "../../assets/assets";
-import type { Resume } from "../../assets/types";
+import type { Resume } from "../../utils/types";
 import { useNavigate } from "react-router-dom";
 import CreateResumeModal from "./CreateResumeModal";
 import UploadResumeModal from "./UploadResumeModal";

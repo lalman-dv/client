@@ -1,5 +1,5 @@
 import dummy_profile from "./dummy_profile.png";
-import type { Resume } from "./types";
+import type { Resume } from "../utils/types";
 
 export const dummyResumeData: Resume[] = [
   {

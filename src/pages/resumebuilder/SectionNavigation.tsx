@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import TemplateSelector from "../../components/templates/TemplateSelector";
 import ColorPicker from "../../components/templates/ColorPicker";
-import type { ResumeData } from "../../assets/types";
+import type { ResumeData } from "../../utils/types";
 
 interface Props {
   resumeData: ResumeData;

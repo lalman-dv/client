@@ -3,7 +3,7 @@ import ClassicTemplate from "../../components/templates/ClassicTemplate";
 import ModernTemplate from "../../components/templates/ModernTemplate";
 import MinimalTemplate from "../../components/templates/MinimalTemplate";
 import MinimalImageTemplate from "../../components/templates/MinimalImageTemplate";
-import type { ResumeData } from "../../assets/types";
+import type { ResumeData } from "../../utils/types";
 
 export interface ResumePreviewProps {
   data: ResumeData;

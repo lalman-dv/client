@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import PersonalInfoForm from "../../components/PersonalInfoForm";
 import SummaryForm from "../../components/SummaryForm";
 import ExperienceForm from "../../components/ExperienceForm";
-import type { ResumeData } from "../../assets/types";
+import type { ResumeData } from "../../utils/types";
 
 interface Props {
   activeIndex: number;
