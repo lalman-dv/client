@@ -17,6 +17,8 @@ import PersonalInfoForm from "../components/PersonalInfoForm";
 import ResumePreview from "../components/ResumePreview";
 import TemplateSelector from "../components/templates/TemplateSelector";
 import ColorPicker from "../components/templates/ColorPicker";
+import SummaryForm from "../components/SummaryForm";
+import ExperienceForm from "../components/ExperienceForm";
 
 interface ResumeData {
   _id: string;
@@ -207,6 +209,45 @@ const ResumeBuilder: React.FC = () => {
                         }
                         removeBackground={removeBackground}
                         setRemoveBackGround={setRemoveBackGround}
+                      />
+                    </motion.div>
+                  )}
+                  {activeSection.id === "summary" && (
+                    <motion.div
+                      key={activeSection.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      <SummaryForm
+                        data={resumeData.professional_summary ?? ""}
+                        onChange={(data) =>
+                          setResumeData((prev) => ({
+                            ...prev,
+                            professional_summary: data,
+                          }))
+                        }
+                      />
+                    </motion.div>
+                  )}
+
+                  {activeSection.id === "experience" && (
+                    <motion.div
+                      key={activeSection.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      <ExperienceForm
+                        data={resumeData.experience ?? ""}
+                        onChange={(data) =>
+                          setResumeData((prev) => ({
+                            ...prev,
+                            experience: data,
+                          }))
+                        }
                       />
                     </motion.div>
                   )}
