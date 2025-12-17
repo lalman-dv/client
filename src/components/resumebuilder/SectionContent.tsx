@@ -4,6 +4,7 @@ import SummaryForm from "../Personal&ProfessionalInfo/SummaryForm";
 import ExperienceForm from "../Personal&ProfessionalInfo/ExperienceForm";
 import type { ResumeData } from "../../utils/types";
 import EducationForm from "../Personal&ProfessionalInfo/EducationForm";
+import ProjectsForm from "../Personal&ProfessionalInfo/ProjectsForm";
 
 interface Props {
   activeIndex: number;
@@ -75,6 +76,14 @@ const SectionContent: React.FC<Props> = ({
               data={resumeData.education}
               onChange={(data) =>
                 setResumeData((prev) => ({ ...prev, education: data }))
+              }
+            />
+          )}
+          {activeSection === "projects" && (
+            <ProjectsForm
+              data={resumeData.project}
+              onChange={(data) =>
+                setResumeData((prev) => ({ ...prev, project: data }))
               }
             />
           )}
