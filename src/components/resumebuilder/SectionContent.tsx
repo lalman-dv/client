@@ -96,8 +96,17 @@ const SectionContent: React.FC<Props> = ({
               }
             />
           )}
-          {/* TODO: SkillsForm */}
         </motion.div>
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+          className="bg-linear-to-r from-gray-100 to-green-200 text-gray-600 ring hover:ring-gray-400 transition-all rounded-md px-6 py-2 mt-6 text-sm"
+        >
+          Save Changes
+        </motion.button>
       </AnimatePresence>
     </div>
   );

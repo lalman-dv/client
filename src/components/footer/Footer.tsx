@@ -77,7 +77,7 @@ const Footer = () => {
         className="border-t border-slate-200"
       >
         <div className="max-w-7xl mx-auto px-6 py-6 text-center text-sm font-normal">
-          <a href="#">Resume-Builder </a> ©2025. All rights reserved.
+          <a href="#">AI Resume-Studio </a> © 2025. All rights reserved.
         </div>
       </motion.div>
 
