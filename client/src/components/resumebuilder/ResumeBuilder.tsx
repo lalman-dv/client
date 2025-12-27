@@ -71,16 +71,13 @@ const ResumeBuilder: React.FC = () => {
     try {
       if (!resumeId) throw new Error("resumeId is required");
 
-      const formData = new FormData();
-      formData.append("resumeId", resumeId);
-      formData.append(
-        "resumeData",
-        JSON.stringify({ public: !resumeData.public })
-      );
+      const updatedResumeData = { ...resumeData, public: !resumeData.public };
 
-      const { data } = await api.put("/api/resumes/update", formData, {
-        headers: { Authorization: token },
-      });
+      const { data } = await api.put(
+        "/api/resumes/update",
+        { resumeId, resumeData: updatedResumeData },
+        { headers: { Authorization: token } }
+      );
 
       setResumeData(data.resume);
       toast.success(data.message);

@@ -52,17 +52,17 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onChange }) => {
   };
 
   const enhanceDescription = async (index: number) => {
+    setLoadingIndex(index);
+    const experience = data[index];
+    const prompt = `enhance my job description "${experience.description}" for the position of "${experience.position}" at "${experience.company}"`;
     try {
-      setLoadingIndex(index);
-      const prompt = `enhance my job description "${data[index].description}"`;
-
-      const response = await api.post(
-        "/api/ai/enhance-experience",
+      const { data } = await api.post(
+        "/api/ai/enhance-job-desc",
         { userContent: prompt },
         { headers: { Authorization: token } }
       );
 
-      updateExperience(index, "description", response.data.enhancedContent);
+      updateExperience(index, "description", data.enhancedContent);
       toast.success("Description enhanced with AI");
     } catch (error: unknown) {
       if (error instanceof AxiosError) {
@@ -210,8 +210,12 @@ const ExperienceForm: React.FC<ExperienceFormProps> = ({ data, onChange }) => {
                     whileTap={{ scale: 0.95 }}
                     type="button"
                     onClick={() => enhanceDescription(index)}
-                    disabled={loadingIndex === index}
-                    className="flex items-center gap-1 px-2 py-1 text-xs bg-purple-100 text-purple-700 rounded hover:bg-purple-200 transition-colors disabled:opacity-50"
+                    disabled={
+                      loadingIndex === index ||
+                      !experience.position ||
+                      !experience.company
+                    }
+                    className="flex items-center gap-1 px-2 py-1 text-xs bg-purple-200 text-purple-700 rounded hover:bg-purple-300 transition-colors disabled:opacity-50"
                   >
                     {loadingIndex === index ? (
                       <Loader2 className="w-3 h-3 animate-spin" />
