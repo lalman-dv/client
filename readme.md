@@ -1,4 +1,4 @@
-# 🚀 Resume Builder App
+# 🚀 AI Resume Studio App
 
 ![React](https://img.shields.io/badge/React-18.0-blue?logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
@@ -22,12 +22,14 @@ It combines **AI‑powered enhancements**, **image uploads**, and **real‑time 
 ## 🛠 Tech Stack
 
 ### **Frontend**
+
 - ⚛️ **React + TypeScript** — component‑driven, type‑safe development
 - 🎨 **TailwindCSS** — utility‑first styling for responsive design
 - 🎞 **Framer Motion** — smooth animations and transitions
 - 🔒 **Redux Toolkit** — state management with authentication flow
 
 ### **Backend**
+
 - 🌐 **Node.js + Express** — RESTful APIs
 - 🍃 **MongoDB** — document database for resume storage
 - 📦 **Multer** — file upload middleware
@@ -41,8 +43,9 @@ It combines **AI‑powered enhancements**, **image uploads**, and **real‑time 
 - 📝 **Dynamic Resume Sections**  
   Add, edit, and remove sections like Summary, Experience, Education, Projects, and Skills.
 
-- 🤖 **AI Enhancement**  
-  - Professional summary polished into recruiter‑friendly text.  
+- 🤖 **AI Enhancement**
+
+  - Professional summary polished into recruiter‑friendly text.
   - Job descriptions transformed into impactful bullet points with measurable achievements.
 
 - 📸 **Image Upload**  
@@ -55,44 +58,50 @@ It combines **AI‑powered enhancements**, **image uploads**, and **real‑time 
   Save resumes seamlessly with backend integration.
 
 - 🎨 **Modern UI/UX**  
-  Smooth animations, responsive design, and recruiter‑friendly layouts.
+  Smooth animations, responsive design, and user‑friendly layouts.
 
 ---
 
 ## 📚 What I Learned
 
-- **Frontend Mastery**: Deepened expertise in React, TypeScript, TailwindCSS, and animation libraries.  
-- **Backend Integration**: Hands‑on with Node.js, Express, MongoDB, and authentication flows.  
-- **File Handling**: Implemented image uploads with Multer and ImageKit.  
-- **AI Integration**: Connected OpenAI API to enhance resume content dynamically.  
-- **State Management**: Built scalable Redux flows for authentication and resume data.  
-- **Best Practices**: Structured repos with clean documentation, badges, and recruiter‑friendly presentation.
+- **Frontend Mastery**: Deepened expertise in React, TypeScript, TailwindCSS, and animation libraries.
+- **Backend Integration**: Hands‑on with Node.js, Express, MongoDB, and authentication flows.
+- **File Handling**: Implemented image uploads with Multer and ImageKit.
+- **AI Integration**: Connected OpenAI API to enhance resume content dynamically.
+- **State Management**: Built scalable Redux flows for authentication and resume data.
+- **Best Practices**: Structured repos with clean documentation, badges, and user‑friendly presentation.
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js v18+
 - MongoDB running locally or in the cloud
 - OpenAI API key
 - ImageKit account credentials
 
 ### Installation
+
 ```bash
-git clone https://github.com/yourusername/resume-builder.git
+git clone https://github.com/lalman-dev/ai-resume-studio.git
 cd resume-builder
 npm install
 ```
 
 ### Run Frontend
+
 ```bash
 npm run dev
 ```
+
 ### Run Backend
+
 ```bash
 npm run server
 ```
+
 📌 Future Improvements
 ✅ Add testing with Jest/React Testing Library
 
@@ -104,4 +113,4 @@ npm run server
 
 ## 🏆 Conclusion
 
-This project represents my journey from a  **frontend foundation** into my **introduction to backend and fullstack development**. By integrating AI services, image handling, and secure APIs, I’ve taken my first steps toward building end‑to‑end applications. It’s not just a resume builder — it’s a showcase of how I’m expanding beyond frontend into backend concepts, preparing myself for fullstack roles and opportunities.
+This project represents my journey from a **frontend foundation** into my **introduction to backend and fullstack development**. By integrating AI services, image handling, and secure APIs, I’ve taken my first steps toward building end‑to‑end applications. It’s not just a resume builder — it’s a showcase of how I’m expanding beyond frontend into backend concepts, preparing myself for fullstack roles and opportunities.
